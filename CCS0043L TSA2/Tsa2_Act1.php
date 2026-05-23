@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Fruits</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Fruits</title>
+    <link rel="stylesheet" href="Tsa2_Act1.css">
 </head>
 <body>
 
