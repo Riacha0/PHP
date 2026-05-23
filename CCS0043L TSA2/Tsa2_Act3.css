@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+table {
+    width: 80%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+td {
+    padding: 15px;
+    vertical-align: top;
+}
+
+/* Profile image */
+img {
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+/* Menu */
+ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+}
+
+li {
+    margin: 8px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #2c7be5;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Personal info table */
+table table {
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}
+
+table table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.welcome {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+}
