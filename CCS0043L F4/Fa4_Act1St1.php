@@ -27,7 +27,7 @@ Determined to understand his father and follow in his footsteps, Gon makes a lif
 As Gon prepares for his journey, he says goodbye to the only home he has ever known. With hope in his heart and excitement in his eyes, he sets sail toward the unknown world beyond the sea.<br><br>
 
 This marks the beginning of Gon’s adventure  a journey that will test his strength, form new friendships, and lead him into a world filled with both wonder and danger.
-        </p>
+        </p>   
     </div>
 
     <div class="story-image">
