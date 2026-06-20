@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dob = htmlspecialchars($_POST["dob"] ?? "");
     $address = htmlspecialchars($_POST["address"] ?? "");
 
-    echo "<h4>Submitted Data (POST):</h4>";
+    echo "<h4>Submitted Data:</h4>";
     echo "First Name: $fname <br>";
     echo "Middle Name: $mname <br>";
     echo "Last Name: $lname <br>";
