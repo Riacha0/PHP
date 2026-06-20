@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mini Sign Up</title>
+    <title>Mini Sign Up(GET)</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="container mt-5">
 
-<h2>Mini Sign-Up (GET)</h2>
+<h2>Mini Sign up</h2>
 
 <form method="GET">
     <div class="mb-3">
