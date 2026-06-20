@@ -14,7 +14,7 @@ $colors = $_SESSION['colors'];
 
 <html>
 <head>
-    <title>ResultColors.php</title>
+    <title>My Favorite Colors</title>
      <link rel="stylesheet" href="item3Result.css">
     item3Result.css
 </head>
