@@ -5,10 +5,10 @@ body {
     padding: 0;
 }
 
-/* Form container */
+
 .container {
     max-width: 450px;
-    margin: 60px auto; /* center the form */
+    margin: 60px auto; 
     background: white;
     padding: 30px;
     border-radius: 12px;
@@ -16,7 +16,7 @@ body {
     animation: fadeIn 0.8s ease-in-out;
 }
 
-/* Title */
+
 h2 {
     text-align: center;
     margin-bottom: 25px;
@@ -24,13 +24,13 @@ h2 {
     font-weight: bold;
 }
 
-/* Labels */
+
 label {
     font-weight: 600;
     color: #555;
 }
 
-/* Inputs */
+
 input {
     border-radius: 8px !important;
     transition: all 0.3s ease;
@@ -41,7 +41,6 @@ input:focus {
     box-shadow: 0 0 6px rgba(0, 184, 148, 0.5) !important;
 }
 
-/* Button */
 button {
     width: 100%;
     border-radius: 8px;
@@ -58,21 +57,55 @@ button:hover {
     transform: scale(1.02);
 }
 
-/* Divider */
+
 hr {
     margin: 25px 0;
 }
 
-/* Output text */
+/
 h4 {
     color: #2d3436;
 }
 
-/* Fade animation */
+
 @keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.result-box {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-left: 5px solid #00b894;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.result-box h4 {
+    margin-bottom: 15px;
+    color: #2d3436;
+}
+
+
+.result-box p {
+    margin: 5px 0;
+    font-size: 15px;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
     }
     to {
         opacity: 1;
