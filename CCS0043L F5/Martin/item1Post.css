@@ -1,62 +1,81 @@
-<style>
 body {
     background: linear-gradient(135deg, #74b9ff, #81ecec);
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
+/* Form container */
 .container {
-    max-width: 500px;
-    background: #fff;
+    max-width: 450px;
+    margin: 60px auto; /* center the form */
+    background: white;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.8s ease-in-out;
 }
 
 /* Title */
 h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    color: #2d3436;
     font-weight: bold;
-    color: #333;
 }
 
 /* Labels */
 label {
     font-weight: 600;
+    color: #555;
 }
 
 /* Inputs */
-.form-control {
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    transition: 0.3s;
+input {
+    border-radius: 8px !important;
+    transition: all 0.3s ease;
 }
 
-.form-control:focus {
-    border-color: #00b894;
-    box-shadow: 0 0 5px rgba(0,184,148,0.5);
+input:focus {
+    border-color: #00b894 !important;
+    box-shadow: 0 0 6px rgba(0, 184, 148, 0.5) !important;
 }
 
 /* Button */
-.btn-success {
+button {
     width: 100%;
     border-radius: 8px;
     font-size: 16px;
-    background-color: #00b894;
+    background: #00b894;
     border: none;
+    color: white;
+    padding: 10px;
     transition: 0.3s;
 }
 
-.btn-success:hover {
-    background-color: #019875;
+button:hover {
+    background: #019875;
+    transform: scale(1.02);
 }
 
-/* Output section */
+/* Divider */
+hr {
+    margin: 25px 0;
+}
+
+/* Output text */
 h4 {
     color: #2d3436;
 }
 
-hr {
-    margin: 25px 0;
+/* Fade animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
-</style>
