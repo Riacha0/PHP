@@ -12,32 +12,28 @@ $_SESSION['colors'] = [
 $colors = $_SESSION['colors'];
 ?>
 
-<!DOCTYPE html>
 <html>
 <head>
     <title>ResultColors.php</title>
-    <style>
-        body {
-            font-family: serif;
-            font-size: 20px;
-            margin: 50px;
-        }
-    </style>
+     <link rel="stylesheet" href="item3Result.css">
+    item3Result.css
 </head>
 
 <body>
 
-<h2>ResultColors.php</h2>
+<div class="container">
+    <h2>ResultColors.php</h2>
 
-<?php
-foreach ($colors as $index => $color) {
-    $color = htmlspecialchars($color);
+    <?php
+    foreach ($colors as $index => $color) {
+        $color = htmlspecialchars($color);
 
-    if ($color != "") {
-        echo "My Favorite Color " . ($index + 1) . ": $color <br><br>";
+        if ($color != "") {
+            echo "<p>My Favorite Color " . ($index + 1) . ": $color</p>";
+        }
     }
-}
-?>
+    ?>
+</div>
 
 </body>
 </html>
