@@ -15,14 +15,13 @@ $colors = $_SESSION['colors'];
 <html>
 <head>
     <title>My Favorite Colors</title>
-     <link rel="stylesheet" href="item3Result.css">
-    item3Result.css
+    <link rel="stylesheet" href="item3Result.css">
 </head>
 
 <body>
 
 <div class="container">
-    <h2>ResultColors.php</h2>
+    <h2>My Favorite Colors</h2>
 
     <?php
     foreach ($colors as $index => $color) {
