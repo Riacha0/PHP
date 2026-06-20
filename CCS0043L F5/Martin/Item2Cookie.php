@@ -1,13 +1,13 @@
 <?php
 // Set cookies (only once)
 if (!isset($_COOKIE["fname"])) {
-    setcookie("fname", "John", time() + 10);
+    setcookie("fname", "Charles", time() + 10);
 }
 if (!isset($_COOKIE["mname"])) {
-    setcookie("mname", "Michael", time() + 20);
+    setcookie("mname", "Miguel", time() + 20);
 }
 if (!isset($_COOKIE["lname"])) {
-    setcookie("lname", "Doe", time() + 30);
+    setcookie("lname", "Martin", time() + 30);
 }
 ?>
 
