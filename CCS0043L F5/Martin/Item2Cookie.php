@@ -49,10 +49,10 @@ if (!isset($_COOKIE["lname"])) {
 <body>
 
 <div class="box">
-    <h2>Personal Information (Cookies)</h2>
+    <h2>Personal Information</h2>
 
     <?php
-    // Display cookies only if they still exist
+    
     if (isset($_COOKIE["fname"])) {
         echo "<p><strong>First Name:</strong> " . $_COOKIE["fname"] . "</p>";
     }
