@@ -6,7 +6,6 @@ session_start();
 <html>
 <head>
     <title>Favorite Colors</title>
-
     <style>
         body {
             font-family: Arial;
@@ -30,8 +29,6 @@ session_start();
             width: 100%;
             padding: 8px;
             margin: 5px 0 15px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
         }
 
         button {
@@ -40,11 +37,6 @@ session_start();
             background: #00b894;
             color: white;
             border: none;
-            border-radius: 6px;
-        }
-
-        button:hover {
-            background: #019875;
         }
     </style>
 </head>
@@ -54,9 +46,9 @@ session_start();
 <div class="container">
     <h2>Enter Your 5 Favorite Colors</h2>
 
-    item3Result.php
+    <form method="POST" action="Item3Result.php">
         <label>Color 1</label>
-        <input type="text" name="c1" placeholder="e.g. red or #ff0000">
+        <input type="text" name="c1">
 
         <label>Color 2</label>
         <input type="text" name="c2">
