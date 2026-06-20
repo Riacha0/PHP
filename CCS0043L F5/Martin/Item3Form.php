@@ -54,7 +54,7 @@ session_start();
 <div class="container">
     <h2>Enter Your 5 Favorite Colors</h2>
 
-    ResultColors.php
+    item3Result.php
         <label>Color 1</label>
         <input type="text" name="c1" placeholder="e.g. red or #ff0000">
 
