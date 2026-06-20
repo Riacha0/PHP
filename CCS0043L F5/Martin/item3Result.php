@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 $_SESSION['colors'] = [
     $_POST['c1'] ?? '',
     $_POST['c2'] ?? '',
@@ -16,51 +15,29 @@ $colors = $_SESSION['colors'];
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Result Colors</title>
-
+    <title>ResultColors.php</title>
     <style>
         body {
-            font-family: Arial;
-            background: #f5f7fa;
-        }
-
-        .container {
-            width: 500px;
-            margin: 50px auto;
-            text-align: center;
-        }
-
-        .color-box {
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-            color: white;
-            font-weight: bold;
-        }
-
-        h2 {
-            margin-bottom: 20px;
+            font-family: serif;
+            font-size: 20px;
+            margin: 50px;
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h2>My Favorite Colors</h2>
+<h2>ResultColors.php</h2>
 
-    <?php
-    for ($i = 0; $i < count($colors); $i++) {
-        $color = htmlspecialchars($colors[$i]);
+<?php
+foreach ($colors as $index => $color) {
+    $color = htmlspecialchars($color);
 
-        if ($color != "") {
-            echo "<div class='color-box' style='background:$color'>";
-            echo "My Favorite Color " . ($i + 1) . ": $color";
-            echo "</div>";
-        }
+    if ($color != "") {
+        echo "My Favorite Color " . ($index + 1) . ": $color <br><br>";
     }
-    ?>
-</div>
+}
+?>
 
 </body>
 </html>
