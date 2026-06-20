@@ -49,14 +49,15 @@ if ($_GET) {
     $dob = htmlspecialchars($_GET['dob'] ?? '');
     $address = htmlspecialchars($_GET['address'] ?? '');
 
-    echo "<h4>Submitted Data:</h4>";
-    echo "First Name: $fname <br>";
-    echo "Middle Name: $mname <br>";
-    echo "Last Name: $lname <br>";
-    echo "Date of Birth: $dob <br>";
-    echo "Address: $address <br>";
+    echo "<div class='result-box'>";
+    echo "<h4>Submitted Data</h4>";
+    echo "<p><strong>First Name:</strong> $fname</p>";
+    echo "<p><strong>Middle Name:</strong> $mname</p>";
+    echo "<p><strong>Last Name:</strong> $lname</p>";
+    echo "<p><strong>Date of Birth:</strong> $dob</p>";
+    echo "<p><strong>Address:</strong> $address</p>";
+    echo "</div>";
 }
 ?>
-
 </body>
 </html>
