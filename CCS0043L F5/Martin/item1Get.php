@@ -49,7 +49,7 @@ if ($_GET) {
     $dob = htmlspecialchars($_GET['dob'] ?? '');
     $address = htmlspecialchars($_GET['address'] ?? '');
 
-    echo "<h4>Submitted Data (GET):</h4>";
+    echo "<h4>Submitted Data:</h4>";
     echo "First Name: $fname <br>";
     echo "Middle Name: $mname <br>";
     echo "Last Name: $lname <br>";
