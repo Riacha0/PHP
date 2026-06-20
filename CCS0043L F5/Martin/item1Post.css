@@ -1,0 +1,62 @@
+<style>
+body {
+    background: linear-gradient(135deg, #74b9ff, #81ecec);
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 500px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* Title */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Labels */
+label {
+    font-weight: 600;
+}
+
+/* Inputs */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: 0.3s;
+}
+
+.form-control:focus {
+    border-color: #00b894;
+    box-shadow: 0 0 5px rgba(0,184,148,0.5);
+}
+
+/* Button */
+.btn-success {
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #00b894;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-success:hover {
+    background-color: #019875;
+}
+
+/* Output section */
+h4 {
+    color: #2d3436;
+}
+
+hr {
+    margin: 25px 0;
+}
+</style>
