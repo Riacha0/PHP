@@ -48,7 +48,7 @@ session_start();
 
     <form method="POST" action="Item3Result.php">
         <label>Color 1</label>
-        <input type="text" name="c1">
+        <input type="text" name="c1" placeholder="e.g.blue or #0000ff">
 
         <label>Color 2</label>
         <input type="text" name="c2">
