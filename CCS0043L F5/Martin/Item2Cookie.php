@@ -1,24 +1,20 @@
 <?php
-
+// Set cookies (only once)
 if (!isset($_COOKIE["fname"])) {
-    setcookie("fname", "Charles", time() + 10); // expires after 10 sec
+    setcookie("fname", "John", time() + 10);
 }
-
 if (!isset($_COOKIE["mname"])) {
-    setcookie("mname", "Miguel", time() + 20); // expires after 20 sec
+    setcookie("mname", "Michael", time() + 20);
 }
-
 if (!isset($_COOKIE["lname"])) {
-    setcookie("lname", "Martin", time() + 30); // expires after 30 sec
+    setcookie("lname", "Doe", time() + 30);
 }
 ?>
 
+<!DOCTYPE html>
 <html>
 <head>
     <title>Cookie Demo</title>
-    <!-- auto refresh -->
-    
-    <meta http-equiv="refresh" content="2">
 
     <style>
         body {
@@ -36,10 +32,6 @@ if (!isset($_COOKIE["lname"])) {
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        h2 {
-            margin-bottom: 20px;
-        }
-
         p {
             font-size: 18px;
         }
@@ -49,25 +41,23 @@ if (!isset($_COOKIE["lname"])) {
 <body>
 
 <div class="box">
-    <h2>Personal Information</h2>
+    <h2>Personal Information (Cookies)</h2>
 
     <?php
-    
     if (isset($_COOKIE["fname"])) {
-        echo "<p><strong>First Name:</strong> " . $_COOKIE["fname"] . "</p>";
+        echo "<p>First Name: " . $_COOKIE["fname"] . "</p>";
     }
 
     if (isset($_COOKIE["mname"])) {
-        echo "<p><strong>Middle Name:</strong> " . $_COOKIE["mname"] . "</p>";
+        echo "<p>Middle Name: " . $_COOKIE["mname"] . "</p>";
     }
 
     if (isset($_COOKIE["lname"])) {
-        echo "<p><strong>Last Name:</strong> " . $_COOKIE["lname"] . "</p>";
+        echo "<p>Last Name: " . $_COOKIE["lname"] . "</p>";
     }
 
-    // If all cookies are gone
     if (!isset($_COOKIE["fname"]) && !isset($_COOKIE["mname"]) && !isset($_COOKIE["lname"])) {
-        echo "<p><strong>No information left (All cookies expired)</strong></p>";
+        echo "<p><strong>No information left</strong></p>";
     }
     ?>
 </div>
