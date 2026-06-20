@@ -42,7 +42,7 @@
 
 <?php
 if ($_GET) {
-    // Use htmlspecialchars to prevent XSS attacks
+    
     $fname = htmlspecialchars($_GET['fname'] ?? '');
     $mname = htmlspecialchars($_GET['mname'] ?? '');
     $lname = htmlspecialchars($_GET['lname'] ?? '');
