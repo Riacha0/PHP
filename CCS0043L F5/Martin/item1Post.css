@@ -62,7 +62,7 @@ hr {
     margin: 25px 0;
 }
 
-/
+
 h4 {
     color: #2d3436;
 }
@@ -90,11 +90,11 @@ h4 {
     animation: fadeIn 0.5s ease-in-out;
 }
 
+
 .result-box h4 {
     margin-bottom: 15px;
     color: #2d3436;
 }
-
 
 .result-box p {
     margin: 5px 0;
