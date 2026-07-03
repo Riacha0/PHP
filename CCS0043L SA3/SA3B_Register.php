@@ -63,3 +63,70 @@
 </body>
 
 </html>
+<?php
+
+include "SA3B_DBConnection.php";
+
+if(isset($_POST['register'])){
+
+    $firstname = $_POST['firstname'];
+    $middlename = $_POST['middlename'];
+    $lastname = $_POST['lastname'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $confirmpassword = $_POST['confirmpassword'];
+    $birthday = $_POST['birthday'];
+    $email = $_POST['email'];
+    $contact = $_POST['contact'];
+
+    if($password == $confirmpassword){
+
+        $sql = "INSERT INTO MyUsers
+        (firstname, middlename, lastname, username, password, birthday, email, contact)
+
+        VALUES
+
+        ('$firstname',
+        '$middlename',
+        '$lastname',
+        '$username',
+        '$password',
+        '$birthday',
+        '$email',
+        '$contact')";
+
+        if(mysqli_query($conn, $sql)){
+
+            echo "<script>
+
+                    alert('Registration Successful!');
+
+                    window.location='SA3B_Login.php';
+
+                  </script>";
+
+        }
+        else{
+
+            echo "<script>
+
+                    alert('Registration Failed!');
+
+                  </script>";
+
+        }
+
+    }
+    else{
+
+        echo "<script>
+
+                alert('Password and Confirm Password are not the same.');
+
+              </script>";
+
+    }
+
+}
+
+?>
