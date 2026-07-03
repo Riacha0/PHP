@@ -62,6 +62,16 @@
 
 <?php
 
+session_start();
+
+if(isset($_SESSION['username'])){
+
+    header("Location: SA3A_Home.php");
+    exit();
+
+}
+
+
 if (isset($_POST['submit'])) {
 
     $firstname = $_POST['firstname'];
