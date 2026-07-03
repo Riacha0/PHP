@@ -34,13 +34,13 @@
                 value="<?php if(isset($_COOKIE['password'])) echo $_COOKIE['password']; ?>"
                 required>
 
-            <div class="remember">
+           <div class="remember">
 
-                <input type="checkbox" name="remember">
+    <input type="checkbox" id="remember" name="remember">
 
-                <label>Remember Me</label>
+    <label for="remember">Remember Me</label>
 
-            </div>
+</div>
 
             <input type="submit" name="login" value="Submit">
 
