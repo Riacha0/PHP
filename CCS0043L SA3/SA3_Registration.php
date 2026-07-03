@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SA3 Registration Module</title>
 
-    <link rel="stylesheet" href="SA3_Registration.css">
+    <link rel="stylesheet" href="SA3A_Style.css">
 </head>
 
 <body>
