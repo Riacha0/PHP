@@ -36,11 +36,11 @@
 
             <div class="remember">
 
-                <input type="checkbox" id="remember" name="remember">
+            <input type="checkbox" name="remember">
 
-                <label for="remember">Remember Me</label>
+            <span>Remember Me</span>
 
-            </div>
+</div>
 
             <input type="submit" name="login" value="Submit">
 
