@@ -51,3 +51,35 @@
 </body>
 
 </html>
+<?php
+
+if (isset($_POST['login'])) {
+
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    if (isset($_POST['remember'])) {
+
+        setcookie("username", $username, time() + 3600);
+        setcookie("password", $password, time() + 3600);
+
+        echo "<script>
+                alert('Cookies have been saved!');
+                window.location='SA3A_Login.php';
+              </script>";
+
+    } else {
+
+        setcookie("username", "", time() - 3600);
+        setcookie("password", "", time() - 3600);
+
+        echo "<script>
+                alert('Cookies were not saved.');
+                window.location='SA3A_Login.php';
+              </script>";
+
+    }
+
+}
+
+?>
