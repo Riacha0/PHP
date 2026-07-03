@@ -125,23 +125,16 @@ input[type=submit]:hover{
 
     display:flex;
     align-items:center;
+    gap:8px;
     margin-top:15px;
     margin-bottom:15px;
+    font-weight:normal;
 
 }
 
-.remember input[type=checkbox]{
+.remember input{
 
     width:auto;
-    margin-right:10px;
-    cursor:pointer;
-
-}
-
-.remember label{
-
     margin:0;
-    font-weight:normal;
-    cursor:pointer;
 
 }
