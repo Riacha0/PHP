@@ -63,11 +63,12 @@
 </body>
 
 </html>
+
 <?php
 
-include "SA3B_DBConnection.php";
+include("SA3B_DBConnection.php");
 
-if(isset($_POST['register'])){
+if (isset($_POST['register'])) {
 
     $firstname = $_POST['firstname'];
     $middlename = $_POST['middlename'];
@@ -79,13 +80,17 @@ if(isset($_POST['register'])){
     $email = $_POST['email'];
     $contact = $_POST['contact'];
 
-    if($password == $confirmpassword){
+    if ($password != $confirmpassword) {
+
+        echo "<script>
+                alert('Password and Confirm Password are not the same.');
+              </script>";
+
+    } else {
 
         $sql = "INSERT INTO MyUsers
         (firstname, middlename, lastname, username, password, birthday, email, contact)
-
         VALUES
-
         ('$firstname',
         '$middlename',
         '$lastname',
@@ -95,35 +100,24 @@ if(isset($_POST['register'])){
         '$email',
         '$contact')";
 
-        if(mysqli_query($conn, $sql)){
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
 
             echo "<script>
-
                     alert('Registration Successful!');
-
-                    window.location='SA3B_Login.php';
-
+                    window.location.href='SA3B_Login.php';
                   </script>";
 
-        }
-        else{
+        } else {
 
             echo "<script>
-
                     alert('Registration Failed!');
-
                   </script>";
 
+            echo mysqli_error($conn);
+
         }
-
-    }
-    else{
-
-        echo "<script>
-
-                alert('Password and Confirm Password are not the same.');
-
-              </script>";
 
     }
 
