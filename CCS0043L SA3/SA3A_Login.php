@@ -34,13 +34,13 @@
                 value="<?php if(isset($_COOKIE['password'])) echo $_COOKIE['password']; ?>"
                 required>
 
-           <div class="remember">
+            <div class="remember">
 
-    <input type="checkbox" id="remember" name="remember">
+                <input type="checkbox" id="remember" name="remember">
 
-    <label for="remember">Remember Me</label>
+                <label for="remember">Remember Me</label>
 
-</div>
+            </div>
 
             <input type="submit" name="login" value="Submit">
 
@@ -51,6 +51,7 @@
 </body>
 
 </html>
+
 <?php
 
 if (isset($_POST['login'])) {
@@ -64,8 +65,11 @@ if (isset($_POST['login'])) {
         setcookie("password", $password, time() + 3600);
 
         echo "<script>
+
                 alert('Cookies have been saved!');
+
                 window.location='SA3A_Login.php';
+
               </script>";
 
     } else {
@@ -74,8 +78,11 @@ if (isset($_POST['login'])) {
         setcookie("password", "", time() - 3600);
 
         echo "<script>
+
                 alert('Cookies were not saved.');
+
                 window.location='SA3A_Login.php';
+
               </script>";
 
     }
