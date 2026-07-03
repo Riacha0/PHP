@@ -53,34 +53,49 @@
 
 <?php
 
-if (isset($_POST['login'])) {
+session_start();
+
+if(isset($_SESSION['username'])){
+
+    header("Location: SA3A_Home.php");
+    exit();
+
+}
+
+if(isset($_POST['login'])){
 
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    if (isset($_POST['remember'])) {
+    $correctUsername = "admin";
+    $correctPassword = "12345";
+
+    if(isset($_POST['remember'])){
 
         setcookie("username", $username, time() + 3600);
         setcookie("password", $password, time() + 3600);
 
-        echo "<script>
-
-                alert('Cookies have been saved!');
-
-                window.location='SA3A_Login.php';
-
-              </script>";
-
-    } else {
+    }
+    else{
 
         setcookie("username", "", time() - 3600);
         setcookie("password", "", time() - 3600);
 
+    }
+
+    if($username == $correctUsername && $password == $correctPassword){
+
+        $_SESSION['username'] = $username;
+
+        header("Location: SA3A_Home.php");
+        exit();
+
+    }
+    else{
+
         echo "<script>
 
-                alert('Cookies were not saved.');
-
-                window.location='SA3A_Login.php';
+                alert('Invalid Username or Password.');
 
               </script>";
 
