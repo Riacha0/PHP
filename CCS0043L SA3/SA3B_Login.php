@@ -31,8 +31,11 @@
     <br>
 
     <p>
+
         Don't have an account?
+
         <a href="SA3B_Register.php">Register Here</a>
+
     </p>
 
 </div>
@@ -45,32 +48,38 @@
 
 session_start();
 
+include("SA3B_DBConnection.php");
+
 if(isset($_SESSION['username'])){
 
-    header("Location: SA3B_Home.php");
-    exit();
+    echo "<script>
+
+            window.location='SA3B_Home.php';
+
+          </script>";
 
 }
-
-include("SA3B_DBConnection.php");
 
 if(isset($_POST['login'])){
 
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM MyUsers
-            WHERE username='$username'
-            AND password='$password'";
+    $sql = "SELECT * FROM MyUsers WHERE username='$username' AND password='$password'";
 
-    $result = mysqli_query($conn,$sql);
+    $result = mysqli_query($conn, $sql);
 
-    if(mysqli_num_rows($result) > 0){
+    if(mysqli_num_rows($result) == 1){
 
         $_SESSION['username'] = $username;
 
-        header("Location: SA3B_Home.php");
-        exit();
+        echo "<script>
+
+                alert('Login Successful!');
+
+                window.location='SA3B_Home.php';
+
+              </script>";
 
     }
     else{
