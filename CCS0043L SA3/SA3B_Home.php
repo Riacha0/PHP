@@ -15,7 +15,7 @@ $username = $_SESSION['username'];
 
 $sql = "SELECT * FROM MyUsers WHERE username='$username'";
 
-$result = mysqli_query($conn, $sql);
+$result = mysqli_query($conn,$sql);
 
 $row = mysqli_fetch_assoc($result);
 
@@ -39,13 +39,23 @@ $row = mysqli_fetch_assoc($result);
 
     <h2>User Information</h2>
 
-    <p><strong>Welcome:</strong> <?php echo $row['firstname']." ".$row['middlename']." ".$row['lastname']; ?></p>
+    <p><strong>Welcome:</strong>
+    <?php
+    echo $row['firstname']." ".$row['middlename']." ".$row['lastname'];
+    ?>
+    </p>
 
-    <p><strong>Birthday:</strong> <?php echo $row['birthday']; ?></p>
+    <p><strong>Birthday:</strong>
+    <?php echo $row['birthday']; ?>
+    </p>
 
-    <p><strong>Email:</strong> <?php echo $row['email']; ?></p>
+    <p><strong>Email:</strong>
+    <?php echo $row['email']; ?>
+    </p>
 
-    <p><strong>Contact Number:</strong> <?php echo $row['contact']; ?></p>
+    <p><strong>Contact Number:</strong>
+    <?php echo $row['contact']; ?>
+    </p>
 
     <br>
 
