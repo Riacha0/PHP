@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>SA3 Activity B - Login</title>
 
@@ -14,31 +12,77 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h2>Login Form</h2>
+    <h2>Login Form</h2>
 
-        <form action="" method="POST">
+    <form action="" method="POST">
 
-            <label>Username</label>
-            <input type="text" name="username" required>
+        <label>Username</label>
+        <input type="text" name="username" required>
 
-            <label>Password</label>
-            <input type="password" name="password" required>
+        <label>Password</label>
+        <input type="password" name="password" required>
 
-            <input type="submit" name="login" value="Login">
+        <input type="submit" name="login" value="Login">
 
-        </form>
+    </form>
 
-        <br>
+    <br>
 
-        <p>
-            Don't have an account?
-            <a href="SA3B_Register.php">Register Here</a>
-        </p>
+    <p>
+        Don't have an account?
+        <a href="SA3B_Register.php">Register Here</a>
+    </p>
 
-    </div>
+</div>
 
 </body>
 
 </html>
+
+<?php
+
+session_start();
+
+if(isset($_SESSION['username'])){
+
+    header("Location: SA3B_Home.php");
+    exit();
+
+}
+
+include("SA3B_DBConnection.php");
+
+if(isset($_POST['login'])){
+
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $sql = "SELECT * FROM MyUsers
+            WHERE username='$username'
+            AND password='$password'";
+
+    $result = mysqli_query($conn,$sql);
+
+    if(mysqli_num_rows($result) > 0){
+
+        $_SESSION['username'] = $username;
+
+        header("Location: SA3B_Home.php");
+        exit();
+
+    }
+    else{
+
+        echo "<script>
+
+                alert('Invalid Username or Password.');
+
+              </script>";
+
+    }
+
+}
+
+?>
