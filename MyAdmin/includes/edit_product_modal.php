@@ -207,12 +207,5 @@
 
 </div>
 
-<script>
-
-var editModal = new bootstrap.Modal(document.getElementById('editProductModal'));
-
-editModal.show();
-
-</script>
 
 <?php } ?>
