@@ -10,6 +10,56 @@ include("../includes/header.php");
 
 <?php
 
+if(isset($_GET['delete_id'])){
+
+    $delete_id = $_GET['delete_id'];
+
+    $get_image = mysqli_query($conn,
+    "SELECT image FROM products WHERE product_id='$delete_id'");
+
+    $row = mysqli_fetch_assoc($get_image);
+
+    if($row){
+
+        if(file_exists("../uploads/".$row['image'])){
+
+            unlink("../uploads/".$row['image']);
+
+        }
+
+    }
+
+    $sql = "DELETE FROM products
+            WHERE product_id='$delete_id'";
+
+    if(mysqli_query($conn,$sql)){
+
+        echo "<script>
+
+                alert('Product Deleted Successfully.');
+
+                window.location='manage_products.php';
+
+              </script>";
+
+    }
+
+    else{
+
+        echo "<script>
+
+                alert('Unable to delete product.');
+
+              </script>";
+
+    }
+
+}
+
+?>
+
+<?php
+
 $edit_product = null;
 
 if(isset($_GET['edit_id'])){
@@ -177,10 +227,30 @@ if(isset($_POST['save_product'])){
 
                         <div class="col-md-4">
 
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Search Product">
+                        <form action="" method="GET">
+
+        <div class="input-group">
+
+        <input
+            type="text"
+            class="form-control"
+            name="search"
+            placeholder="Search Product..."
+            value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
+
+        <button
+            class="btn btn-primary"
+            type="submit">
+
+            <i class="bi bi-search"></i>
+
+            Search
+
+        </button>
+
+    </div>
+
+</form>
 
                         </div>
 
@@ -190,17 +260,35 @@ if(isset($_POST['save_product'])){
 
                         <thead class="table-light">
 
-                            <tr>
+                           <thead class="table-light">
 
-                                <th>Image</th>
-                                <th>Product</th>
-                                <th>Category</th>
-                                <th>Price</th>
-                                <th>Stock</th>
-                                <th>Status</th>
-                                <th width="180">Actions</th>
+                        <tr>
 
-                            </tr>
+                        <th width="40">
+
+<input
+type="checkbox"
+id="selectAll">
+
+</th>
+
+<th>Image</th>
+
+<th>Product</th>
+
+<th>Category</th>
+
+<th>Price</th>
+
+<th>Stock</th>
+
+<th>Status</th>
+
+<th width="180">Actions</th>
+
+</tr>
+
+</thead>
 
                         </thead>
 
@@ -208,10 +296,38 @@ if(isset($_POST['save_product'])){
 
 <?php
 
-$sql = "SELECT products.*, categories.category_name
-        FROM products
-        LEFT JOIN categories
-        ON products.category_id = categories.category_id";
+if(isset($_GET['search'])){
+
+    $search = mysqli_real_escape_string($conn,$_GET['search']);
+
+    $sql = "SELECT products.*, categories.category_name
+
+            FROM products
+
+            LEFT JOIN categories
+
+            ON products.category_id = categories.category_id
+
+            WHERE
+
+            product_name LIKE '%$search%'
+
+            OR
+
+            category_name LIKE '%$search%'";
+
+}
+else{
+
+    $sql = "SELECT products.*, categories.category_name
+
+            FROM products
+
+            LEFT JOIN categories
+
+            ON products.category_id = categories.category_id";
+
+}
 
 $result = mysqli_query($conn,$sql);
 
@@ -292,13 +408,15 @@ if(mysqli_num_rows($result) > 0){
         <i class="bi bi-pencil-square"></i>
 
     </a>
+<a
+    href="manage_products.php?delete_id=<?php echo $row['product_id']; ?>"
+    class="btn btn-sm btn-danger"
 
-    <button
-        class="btn btn-sm btn-danger">
+    onclick="return confirm('Are you sure you want to delete this product?');">
 
-        <i class="bi bi-trash"></i>
+    <i class="bi bi-trash"></i>
 
-    </button>
+</a>
 
 </td>
 
