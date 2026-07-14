@@ -1,15 +1,61 @@
-<html>
+<div class="col-lg-2 sidebar text-white p-4">
 
-<head>
+    <div class="text-center">
 
-    <meta charset="UTF-8">
+        <h2 class="fw-bold">MyAdmin</h2>
 
-    <title>MyAdmin | Dashboard</title>
+        <small>Administrator Panel</small>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    </div>
 
-    <link rel="stylesheet" href="../css/admin.css">
+    <hr>
 
-</head>
+    <a href="dashboard.php" class="menu active">
 
-<body>
+        <i class="bi bi-speedometer2"></i>
+
+        Dashboard
+
+    </a>
+
+    <a href="manage_products.php" class="menu">
+
+        <i class="bi bi-box-seam"></i>
+
+        Manage Products
+
+    </a>
+
+    <a href="admin_users.php" class="menu">
+
+        <i class="bi bi-people"></i>
+
+        Admin Users
+
+    </a>
+
+    <a href="inventory_reports.php" class="menu">
+
+        <i class="bi bi-bar-chart"></i>
+
+        Inventory Report
+
+    </a>
+
+    <a href="audit_logs.php" class="menu">
+
+        <i class="bi bi-clock-history"></i>
+
+        Audit Logs
+
+    </a>
+
+    <a href="logout.php" class="logout">
+
+        <i class="bi bi-box-arrow-right"></i>
+
+        Logout
+
+    </a>
+
+</div>
