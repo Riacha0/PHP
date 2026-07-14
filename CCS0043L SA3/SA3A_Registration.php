@@ -71,7 +71,6 @@ if(isset($_SESSION['username'])){
 
 }
 
-
 if (isset($_POST['submit'])) {
 
     $firstname = $_POST['firstname'];
