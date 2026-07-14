@@ -2,6 +2,60 @@
 
 include("../includes/session.php");
 include("../includes/header.php");
+include("../includes/db_connection.php");
+
+?>
+
+<?php
+
+if(isset($_POST['save_product'])){
+
+    $product_name = $_POST['product_name'];
+    $category_id = $_POST['category_id'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
+    $stock = $_POST['stock'];
+
+    $image = $_FILES['image']['name'];
+    $temp_image = $_FILES['image']['tmp_name'];
+
+    move_uploaded_file($temp_image, "../uploads/".$image);
+
+    $sql = "INSERT INTO products
+            (category_id, product_name, description, price, stock, image)
+
+            VALUES
+
+            ('$category_id',
+             '$product_name',
+             '$description',
+             '$price',
+             '$stock',
+             '$image')";
+
+    if(mysqli_query($conn,$sql)){
+
+        echo "<script>
+
+                alert('Product Added Successfully.');
+
+                window.location='manage_products.php';
+
+              </script>";
+
+    }
+
+    else{
+
+        echo "<script>
+
+                alert('Unable to save product.');
+
+              </script>";
+
+    }
+
+}
 
 ?>
 
@@ -18,10 +72,9 @@ include("../includes/header.php");
                 <div>
 
                     <h2 class="text-primary fw-bold">
-
                         Manage Products
-
                     </h2>
+
                     <small>
                         Add, edit and manage all products.
                     </small>
@@ -82,7 +135,15 @@ include("../includes/header.php");
 
                                 <td colspan="7" class="text-center text-muted py-5">
 
+                                    <i class="bi bi-box-seam fs-1"></i>
+
+                                    <br><br>
+
                                     No products available.
+
+                                    <br>
+
+                                    Click <strong>Add Product</strong> to add your first item.
 
                                 </td>
 
@@ -106,143 +167,186 @@ include("../includes/header.php");
 
     <div class="modal-dialog modal-lg">
 
-        <div class="modal-content">
+        <form action="" method="POST" enctype="multipart/form-data">
 
-            <div class="modal-header">
+            <div class="modal-content">
 
-                <h5>
+                <div class="modal-header">
 
-                    Add New Product
+                    <h5 class="fw-bold">
 
-                </h5>
+                        Add New Product
 
-                <button
-                    class="btn-close"
-                    data-bs-dismiss="modal">
+                    </h5>
 
-                </button>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal">
 
-            </div>
+                    </button>
 
-            <div class="modal-body">
+                </div>
 
-                <div class="row">
+                <div class="modal-body">
 
-                    <div class="col-md-6 mb-3">
+                    <div class="row">
 
-                        <label>
+                        <div class="col-md-6 mb-3">
 
-                            Product Name
+                            <label class="form-label">
 
-                        </label>
+                                Product Name
 
-                        <input
-                            type="text"
-                            class="form-control">
+                            </label>
 
-                    </div>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="product_name"
+                                required>
 
-                    <div class="col-md-6 mb-3">
+                        </div>
 
-                        <label>
+                        <div class="col-md-6 mb-3">
 
-                            Category
+                            <label class="form-label">
 
-                        </label>
+                                Category
 
-                        <select class="form-select">
+                            </label>
 
-                            <option>
+                            <select
+                                class="form-select"
+                                name="category_id"
+                                required>
 
-                                Select Category
+                                <option value="">
 
-                            </option>
+                                    Select Category
 
-                        </select>
+                                </option>
 
-                    </div>
+                                <?php
 
-                    <div class="col-md-12 mb-3">
+                                $category = mysqli_query($conn,"SELECT * FROM categories");
 
-                        <label>
+                                while($row = mysqli_fetch_assoc($category)){
 
-                            Description
+                                ?>
 
-                        </label>
+                                    <option value="<?php echo $row['category_id']; ?>">
 
-                        <textarea
-                            class="form-control"
-                            rows="3">
+                                        <?php echo $row['category_name']; ?>
 
-                        </textarea>
+                                    </option>
 
-                    </div>
+                                <?php
 
-                    <div class="col-md-4 mb-3">
+                                }
 
-                        <label>
+                                ?>
 
-                            Price
+                            </select>
 
-                        </label>
+                        </div>
 
-                        <input
-                            type="number"
-                            class="form-control">
+                        <div class="col-md-12 mb-3">
 
-                    </div>
+                            <label class="form-label">
 
-                    <div class="col-md-4 mb-3">
+                                Description
 
-                        <label>
+                            </label>
 
-                            Stock
+                            <textarea
+                                class="form-control"
+                                rows="3"
+                                name="description"
+                                required></textarea>
 
-                        </label>
+                        </div>
 
-                        <input
-                            type="number"
-                            class="form-control">
+                        <div class="col-md-4 mb-3">
 
-                    </div>
+                            <label class="form-label">
 
-                    <div class="col-md-4 mb-3">
+                                Price
 
-                        <label>
+                            </label>
 
-                            Product Image
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="price"
+                                required>
 
-                        </label>
+                        </div>
 
-                        <input
-                            type="file"
-                            class="form-control">
+                        <div class="col-md-4 mb-3">
+
+                            <label class="form-label">
+
+                                Stock
+
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="stock"
+                                required>
+
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+
+                            <label class="form-label">
+
+                                Product Image
+
+                            </label>
+
+                            <input
+                                type="file"
+                                class="form-control"
+                                name="image"
+                                accept="image/*"
+                                required>
+
+                        </div>
 
                     </div>
 
                 </div>
 
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+
+                        Cancel
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        name="save_product">
+
+                        <i class="bi bi-floppy"></i>
+
+                        Save Product
+
+                    </button>
+
+                </div>
+
             </div>
 
-            <div class="modal-footer">
-
-                <button
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal">
-
-                    Cancel
-
-                </button>
-
-                <button class="btn btn-primary">
-
-                    Save Product
-
-                </button>
-
-            </div>
-
-        </div>
+        </form>
 
     </div>
 
