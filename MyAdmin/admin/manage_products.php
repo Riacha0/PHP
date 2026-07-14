@@ -130,6 +130,59 @@ if(isset($_POST['update_product'])){
 }
 
 ?>
+<?php
+
+if(isset($_POST['delete_selected'])){
+
+    if(isset($_POST['delete_ids'])){
+
+        foreach($_POST['delete_ids'] as $delete_id){
+
+            $get_image = mysqli_query($conn,
+            "SELECT image FROM products
+             WHERE product_id='$delete_id'");
+
+            $image_row = mysqli_fetch_assoc($get_image);
+
+            if($image_row){
+
+                if(file_exists("../uploads/".$image_row['image'])){
+
+                    unlink("../uploads/".$image_row['image']);
+
+                }
+
+            }
+
+            mysqli_query($conn,
+            "DELETE FROM products
+             WHERE product_id='$delete_id'");
+
+        }
+
+        echo "<script>
+
+                alert('Selected products deleted successfully.');
+
+                window.location='manage_products.php';
+
+              </script>";
+
+    }
+
+    else{
+
+        echo "<script>
+
+                alert('Please select at least one product.');
+
+              </script>";
+
+    }
+
+}
+
+?>
 
 <?php
 
@@ -256,6 +309,7 @@ if(isset($_POST['save_product'])){
 
                     </div>
 
+                    <form action="" method="POST">
                     <table class="table table-hover align-middle">
 
                         <thead class="table-light">
@@ -266,25 +320,20 @@ if(isset($_POST['save_product'])){
 
                         <th width="40">
 
-<input
-type="checkbox"
-id="selectAll">
+                       
+                        <th>Image</th>
 
-</th>
+                        <th>Product</th>
 
-<th>Image</th>
+                        <th>Category</th>
 
-<th>Product</th>
+                        <th>Price</th>
 
-<th>Category</th>
+                        <th>Stock</th>
 
-<th>Price</th>
+                        <th>Status</th>
 
-<th>Stock</th>
-
-<th>Status</th>
-
-<th width="180">Actions</th>
+                        <th width="180">Actions</th>
 
 </tr>
 
@@ -338,6 +387,16 @@ if(mysqli_num_rows($result) > 0){
 ?>
 
 <tr>
+
+    <td>
+
+        <input
+            type="checkbox"
+            class="productCheckbox"
+            name="delete_ids[]"
+            value="<?php echo $row['product_id']; ?>">
+
+    </td>
 
     <td>
 
@@ -455,6 +514,24 @@ else{
 </tbody>
 
                     </table>
+                    <div class="mt-3">
+
+                    <button
+                    type="submit"
+                    class="btn btn-danger"
+                    name="delete_selected"
+
+                    onclick="return confirm('Delete all selected products?');">
+
+                   <i class="bi bi-trash"></i>
+
+                    Delete Selected
+
+                  </button>
+
+</div>
+
+</form>
 
                 </div>
 
@@ -473,6 +550,22 @@ else{
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 <?php if($edit_product){ ?>
+
+<script>
+
+document.getElementById("selectAll").addEventListener("change", function(){
+
+    let checkboxes = document.querySelectorAll(".productCheckbox");
+
+    checkboxes.forEach(function(box){
+
+        box.checked = document.getElementById("selectAll").checked;
+
+    });
+
+});
+
+</script>
 
 <script>
 
