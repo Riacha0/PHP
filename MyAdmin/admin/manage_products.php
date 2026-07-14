@@ -1,8 +1,9 @@
 <?php
 
 include("../includes/session.php");
-include("../includes/header.php");
 include("../includes/db_connection.php");
+include("../includes/header.php");
+/** @var mysqli $conn */
 
 ?>
 
