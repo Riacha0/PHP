@@ -10,6 +10,79 @@ include("../includes/header.php");
 
 <?php
 
+$edit_product = null;
+
+if(isset($_GET['edit_id'])){
+
+    $edit_id = $_GET['edit_id'];
+
+    $edit_sql = "SELECT * FROM products WHERE product_id='$edit_id'";
+
+    $edit_result = mysqli_query($conn, $edit_sql);
+
+    if(mysqli_num_rows($edit_result) == 1){
+
+        $edit_product = mysqli_fetch_assoc($edit_result);
+
+    }
+
+}
+
+if(isset($_POST['update_product'])){
+
+    $product_id = $_POST['product_id'];
+    $product_name = $_POST['product_name'];
+    $category_id = $_POST['category_id'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
+    $stock = $_POST['stock'];
+    $old_image = $_POST['old_image'];
+
+    if($_FILES['image']['name'] != ""){
+
+        $image = $_FILES['image']['name'];
+        $temp_image = $_FILES['image']['tmp_name'];
+
+        move_uploaded_file($temp_image, "../uploads/".$image);
+
+    }
+    else{
+
+        $image = $old_image;
+
+    }
+
+    $sql = "UPDATE products
+            SET category_id='$category_id',
+                product_name='$product_name',
+                description='$description',
+                price='$price',
+                stock='$stock',
+                image='$image'
+            WHERE product_id='$product_id'";
+
+    if(mysqli_query($conn, $sql)){
+
+        echo "<script>
+                alert('Product Updated Successfully.');
+                window.location='manage_products.php';
+              </script>";
+
+    }
+    else{
+
+        echo "<script>
+                alert('Unable to update product.');
+              </script>";
+
+    }
+
+}
+
+?>
+
+<?php
+
 if(isset($_POST['save_product'])){
 
     $product_name = $_POST['product_name'];
@@ -210,21 +283,24 @@ if(mysqli_num_rows($result) > 0){
 
     </td>
 
-    <td>
+   <td>
 
-        <button class="btn btn-sm btn-primary">
+    <a
+        href="manage_products.php?edit_id=<?php echo $row['product_id']; ?>"
+        class="btn btn-sm btn-primary">
 
-            <i class="bi bi-pencil-square"></i>
+        <i class="bi bi-pencil-square"></i>
 
-        </button>
+    </a>
 
-        <button class="btn btn-sm btn-danger">
+    <button
+        class="btn btn-sm btn-danger">
 
-            <i class="bi bi-trash"></i>
+        <i class="bi bi-trash"></i>
 
-        </button>
+    </button>
 
-    </td>
+</td>
 
 </tr>
 
