@@ -26,6 +26,8 @@ if(!isset($_SESSION['admin'])){
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet">
+
     <link rel="stylesheet" href="../css/admin.css">
 
 </head>
@@ -34,163 +36,199 @@ if(!isset($_SESSION['admin'])){
 
 <div class="container-fluid">
 
-    <div class="row">
+<div class="row">
 
-        <div class="col-md-2 bg-dark text-white min-vh-100 p-4">
+<div class="col-lg-2 sidebar text-white p-4">
 
-            <h3 class="text-center mb-4">
+    <div class="text-center">
 
-                MyAdmin
+        <h2 class="fw-bold">MyAdmin</h2>
 
-            </h3>
-
-            <hr>
-
-            <a href="dashboard.php" class="text-white text-decoration-none d-block mb-3">
-
-                Dashboard
-
-            </a>
-
-            <a href="manage_products.php" class="text-white text-decoration-none d-block mb-3">
-
-                Manage Products
-
-            </a>
-
-            <a href="admin_users.php" class="text-white text-decoration-none d-block mb-3">
-
-                Admin Users
-
-            </a>
-
-            <a href="inventory_reports.php" class="text-white text-decoration-none d-block mb-3">
-
-                Inventory Report
-
-            </a>
-
-            <a href="audit_logs.php" class="text-white text-decoration-none d-block mb-3">
-
-                Audit Logs
-
-            </a>
-
-            <a href="logout.php" class="text-danger text-decoration-none d-block mt-5">
-
-                Logout
-
-            </a>
-
-        </div>
-
-        <div class="col-md-10 p-4">
-
-            <h2>
-
-                Dashboard
-
-            </h2>
-
-            <p>
-
-                Welcome,
-
-                <strong>
-
-                    <?php echo $_SESSION['fullname']; ?>
-
-                </strong>
-
-            </p>
-
-            <div class="row mt-4">
-
-                <div class="col-md-3">
-
-                    <div class="card shadow">
-
-                        <div class="card-body text-center">
-
-                            <h5>Products</h5>
-
-                            <h1>0</h1>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-3">
-
-                    <div class="card shadow">
-
-                        <div class="card-body text-center">
-
-                            <h5>Admin Users</h5>
-
-                            <h1>1</h1>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-3">
-
-                    <div class="card shadow">
-
-                        <div class="card-body text-center">
-
-                            <h5>Categories</h5>
-
-                            <h1>0</h1>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-3">
-
-                    <div class="card shadow">
-
-                        <div class="card-body text-center">
-
-                            <h5>Low Stock</h5>
-
-                            <h1>0</h1>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="card shadow mt-4">
-
-                <div class="card-header">
-
-                    Recent Activities
-
-                </div>
-
-                <div class="card-body">
-
-                    Welcome to MyAdmin.
-
-                </div>
-
-            </div>
-
-        </div>
+        <small>Administrator Panel</small>
 
     </div>
+
+    <hr>
+
+    <a href="dashboard.php" class="menu active">
+
+        <i class="bi bi-speedometer2"></i>
+
+        Dashboard
+
+    </a>
+
+    <a href="manage_products.php" class="menu">
+
+        <i class="bi bi-box-seam"></i>
+
+        Manage Products
+
+    </a>
+
+    <a href="admin_users.php" class="menu">
+
+        <i class="bi bi-people"></i>
+
+        Admin Users
+
+    </a>
+
+    <a href="inventory_reports.php" class="menu">
+
+        <i class="bi bi-bar-chart"></i>
+
+        Inventory Report
+
+    </a>
+
+    <a href="audit_logs.php" class="menu">
+
+        <i class="bi bi-clock-history"></i>
+
+        Audit Logs
+
+    </a>
+
+    <a href="logout.php" class="logout">
+
+        <i class="bi bi-box-arrow-right"></i>
+
+        Logout
+
+    </a>
+
+</div>
+
+<div class="col-lg-10 p-4">
+
+<div class="topbar">
+
+    <div>
+
+        <h2 class="text-primary fw-bold">
+
+            Dashboard
+
+        </h2>
+
+        <small>
+
+            Welcome back,
+
+            <strong>
+
+                <?php echo $_SESSION['fullname']; ?>
+
+            </strong>
+
+        </small>
+
+    </div>
+
+</div>
+
+<div class="row mt-4 g-4">
+
+<div class="col-lg-3">
+
+<div class="dashboard-card">
+
+<i class="bi bi-box-seam card-icon"></i>
+
+<h6>Products</h6>
+
+<h1>0</h1>
+
+</div>
+
+</div>
+
+<div class="col-lg-3">
+
+<div class="dashboard-card">
+
+<i class="bi bi-people card-icon"></i>
+
+<h6>Admin Users</h6>
+
+<h1>1</h1>
+
+</div>
+
+</div>
+
+<div class="col-lg-3">
+
+<div class="dashboard-card">
+
+<i class="bi bi-tags card-icon"></i>
+
+<h6>Categories</h6>
+
+<h1>0</h1>
+
+</div>
+
+</div>
+
+<div class="col-lg-3">
+
+<div class="dashboard-card">
+
+<i class="bi bi-exclamation-triangle card-icon"></i>
+
+<h6>Low Stock</h6>
+
+<h1>0</h1>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card shadow mt-4">
+
+<div class="card-header fw-bold">
+
+Recent Activities
+
+</div>
+
+<div class="card-body">
+
+<p>
+
+✔ Welcome to MyAdmin.
+
+</p>
+
+<p>
+
+✔ Login Successful.
+
+</p>
+
+<p>
+
+Inventory activities will appear here.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="text-center mt-5 text-secondary">
+
+administrator
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
