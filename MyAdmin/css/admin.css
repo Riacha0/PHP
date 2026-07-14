@@ -25,3 +25,35 @@ h2{
     border-radius:10px;
 
 }
+
+.card{
+
+    border:none;
+
+    border-radius:15px;
+
+}
+
+.card-header{
+
+    font-weight:bold;
+
+}
+
+.bg-dark{
+
+    background:#1f2937 !important;
+
+}
+
+a{
+
+    transition:.3s;
+
+}
+
+a:hover{
+
+    padding-left:10px;
+
+}
