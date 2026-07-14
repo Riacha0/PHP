@@ -22,11 +22,8 @@ include("../includes/header.php");
                         Manage Products
 
                     </h2>
-
                     <small>
-
-                        Add, edit and manage all musical instruments.
-
+                        Add, edit and manage all products.
                     </small>
 
                 </div>
@@ -68,17 +65,11 @@ include("../includes/header.php");
                             <tr>
 
                                 <th>Image</th>
-
                                 <th>Product</th>
-
                                 <th>Category</th>
-
                                 <th>Price</th>
-
                                 <th>Stock</th>
-
                                 <th>Status</th>
-
                                 <th width="180">Actions</th>
 
                             </tr>
