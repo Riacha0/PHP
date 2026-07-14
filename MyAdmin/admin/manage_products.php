@@ -3,6 +3,7 @@
 include("../includes/session.php");
 include("../includes/db_connection.php");
 include("../includes/header.php");
+
 /** @var mysqli $conn */
 
 ?>
@@ -132,25 +133,132 @@ if(isset($_POST['save_product'])){
 
                         <tbody>
 
-                            <tr>
+<?php
 
-                                <td colspan="7" class="text-center text-muted py-5">
+$sql = "SELECT products.*, categories.category_name
+        FROM products
+        LEFT JOIN categories
+        ON products.category_id = categories.category_id";
 
-                                    <i class="bi bi-box-seam fs-1"></i>
+$result = mysqli_query($conn,$sql);
 
-                                    <br><br>
+if(mysqli_num_rows($result) > 0){
 
-                                    No products available.
+    while($row = mysqli_fetch_assoc($result)){
 
-                                    <br>
+?>
 
-                                    Click <strong>Add Product</strong> to add your first item.
+<tr>
 
-                                </td>
+    <td>
 
-                            </tr>
+        <img
+            src="../uploads/<?php echo $row['image']; ?>"
+            width="70"
+            height="70"
+            style="object-fit:cover; border-radius:10px;">
 
-                        </tbody>
+    </td>
+
+    <td>
+
+        <?php echo $row['product_name']; ?>
+
+    </td>
+
+    <td>
+
+        <?php echo $row['category_name']; ?>
+
+    </td>
+
+    <td>
+
+        ₱ <?php echo number_format($row['price'],2); ?>
+
+    </td>
+
+    <td>
+
+        <?php echo $row['stock']; ?>
+
+    </td>
+
+    <td>
+
+        <?php
+
+        if($row['stock'] <= 0){
+
+            echo "<span class='badge bg-danger'>Out of Stock</span>";
+
+        }
+
+        else if($row['stock'] <= 5){
+
+            echo "<span class='badge bg-warning text-dark'>Low Stock</span>";
+
+        }
+
+        else{
+
+            echo "<span class='badge bg-success'>In Stock</span>";
+
+        }
+
+        ?>
+
+    </td>
+
+    <td>
+
+        <button class="btn btn-sm btn-primary">
+
+            <i class="bi bi-pencil-square"></i>
+
+        </button>
+
+        <button class="btn btn-sm btn-danger">
+
+            <i class="bi bi-trash"></i>
+
+        </button>
+
+    </td>
+
+</tr>
+
+<?php
+
+    }
+
+}
+
+else{
+
+?>
+
+<tr>
+
+    <td colspan="7" class="text-center text-muted py-5">
+
+        <i class="bi bi-box-seam fs-1"></i>
+
+        <br><br>
+
+        No products available.
+
+    </td>
+
+</tr>
+
+<?php
+
+}
+
+?>
+
+</tbody>
 
                     </table>
 
