@@ -3,6 +3,7 @@
 include("../includes/session.php");
 include("../includes/db_connection.php");
 include("../includes/header.php");
+include("../includes/add_admin_modal.php");
 
 ?>
 
@@ -17,15 +18,12 @@ include("../includes/header.php");
             <div class="topbar d-flex justify-content-between align-items-center">
 
                 <div>
-
                     <h2 class="text-primary fw-bold">
                         Admin Users
                     </h2>
-
                     <small>
                         Manage administrator accounts.
                     </small>
-
                 </div>
 
                 <button
@@ -43,18 +41,18 @@ include("../includes/header.php");
 
             <div class="card shadow mt-4">
 
-                <div class="card-body">
+            <div class="card-body">
 
-                    <form method="GET">
+            <form method="GET">
 
-                        <div class="row mb-3">
+            <div class="row mb-3">
 
-                            <div class="col-md-4">
+            <div class="col-md-4">
 
-                                <input
-                                    type="text"
-                                    name="search"
-                                    class="form-control"
+            <input
+            type="text"
+            name="search"
+            class="form-control"
                                     placeholder="Search Admin">
 
                             </div>
