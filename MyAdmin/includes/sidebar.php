@@ -16,7 +16,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     <hr>
 
-    <a href="dashboard.php" class="menu active">
+    <a href="dashboard.php"
+       class="menu <?php echo ($current_page == 'dashboard.php') ? 'active' : ''; ?>">
 
         <i class="bi bi-speedometer2"></i>
 
@@ -24,7 +25,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     </a>
 
-    <a href="manage_products.php" class="menu">
+    <a href="manage_products.php"
+       class="menu <?php echo ($current_page == 'manage_products.php') ? 'active' : ''; ?>">
 
         <i class="bi bi-box-seam"></i>
 
@@ -32,7 +34,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     </a>
 
-    <a href="admin_users.php" class="menu">
+    <a href="admin_users.php"
+       class="menu <?php echo ($current_page == 'admin_users.php') ? 'active' : ''; ?>">
 
         <i class="bi bi-people"></i>
 
@@ -40,7 +43,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     </a>
 
-    <a href="inventory_reports.php" class="menu">
+    <a href="inventory_reports.php"
+       class="menu <?php echo ($current_page == 'inventory_reports.php') ? 'active' : ''; ?>">
 
         <i class="bi bi-bar-chart"></i>
 
@@ -48,7 +52,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     </a>
 
-    <a href="audit_logs.php" class="menu">
+    <a href="audit_logs.php"
+       class="menu <?php echo ($current_page == 'audit_logs.php') ? 'active' : ''; ?>">
 
         <i class="bi bi-clock-history"></i>
 
