@@ -3,7 +3,70 @@
 include("../includes/session.php");
 include("../includes/db_connection.php");
 include("../includes/header.php");
-include("../includes/add_admin_modal.php");
+
+if(isset($_POST['save_admin']))
+{
+    $fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $role = mysqli_real_escape_string($conn, $_POST['role']);
+
+    $check = mysqli_query($conn, "SELECT * FROM admins WHERE username='$username'");
+
+    if(mysqli_num_rows($check) > 0)
+    {
+        echo "<script>alert('Username already exists.');</script>";
+    }
+    else
+    {
+        mysqli_query($conn,"
+            INSERT INTO admins(fullname,email,username,password,role)
+            VALUES('$fullname','$email','$username','$password','$role')
+        ");
+
+        echo "<script>
+                alert('Admin added successfully.');
+                window.location='admin_users.php';
+              </script>";
+    }
+    if (isset($_POST['update_admin'])) {
+
+    $admin_id = $_POST['admin_id'];
+    $fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $role = mysqli_real_escape_string($conn, $_POST['role']);
+
+    mysqli_query($conn, "
+        UPDATE admins
+        SET fullname='$fullname',
+            email='$email',
+            username='$username',
+            role='$role'
+        WHERE admin_id='$admin_id'
+    ");
+
+    echo "<script>
+            alert('Admin updated successfully.');
+            window.location='admin_users.php';
+          </script>";
+}
+}
+
+$edit = null;
+
+if (isset($_GET['edit_id'])) {
+
+    $edit_id = $_GET['edit_id'];
+
+    $result = mysqli_query($conn, "SELECT * FROM admins WHERE admin_id='$edit_id'");
+
+    if (mysqli_num_rows($result) > 0) {
+        $edit = mysqli_fetch_assoc($result);
+    }
+}
+
 
 ?>
 
@@ -18,12 +81,15 @@ include("../includes/add_admin_modal.php");
             <div class="topbar d-flex justify-content-between align-items-center">
 
                 <div>
+
                     <h2 class="text-primary fw-bold">
                         Admin Users
                     </h2>
+
                     <small>
                         Manage administrator accounts.
                     </small>
+
                 </div>
 
                 <button
@@ -41,26 +107,25 @@ include("../includes/add_admin_modal.php");
 
             <div class="card shadow mt-4">
 
-            <div class="card-body">
+                <div class="card-body">
 
-            <form method="GET">
+                    <form method="GET">
 
-            <div class="row mb-3">
+                        <div class="row mb-3">
 
-            <div class="col-md-4">
+                            <div class="col-md-4">
 
-            <input
-            type="text"
-            name="search"
-            class="form-control"
+                                <input
+                                    type="text"
+                                    name="search"
+                                    class="form-control"
                                     placeholder="Search Admin">
 
                             </div>
 
                             <div class="col-md-2">
 
-                                <button
-                                    class="btn btn-primary">
+                                <button class="btn btn-primary">
 
                                     Search
 
@@ -79,13 +144,9 @@ include("../includes/add_admin_modal.php");
                             <tr>
 
                                 <th>Full Name</th>
-
                                 <th>Email</th>
-
                                 <th>Username</th>
-
                                 <th>Role</th>
-
                                 <th width="180">Actions</th>
 
                             </tr>
@@ -94,15 +155,91 @@ include("../includes/add_admin_modal.php");
 
                         <tbody>
 
+                            <?php
+
+                            if(isset($_GET['search']))
+                            {
+                                $search = mysqli_real_escape_string($conn, $_GET['search']);
+
+                                $sql = mysqli_query($conn,"
+                                    SELECT *
+                                    FROM admins
+                                    WHERE fullname LIKE '%$search%'
+                                    OR username LIKE '%$search%'
+                                    OR email LIKE '%$search%'
+                                ");
+                            }
+                            else
+                            {
+                                $sql = mysqli_query($conn, "SELECT * FROM admins");
+                            }
+
+                            if(mysqli_num_rows($sql) > 0)
+                            {
+                                while($row = mysqli_fetch_assoc($sql))
+                                {
+                            ?>
+
                             <tr>
 
-                                <td colspan="5" class="text-center text-muted">
+                                <td><?php echo $row['fullname']; ?></td>
+
+                                <td><?php echo $row['email']; ?></td>
+
+                                <td><?php echo $row['username']; ?></td>
+
+                                <td>
+
+                                    <span class="badge bg-primary">
+
+                                        <?php echo $row['role']; ?>
+
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                  <a href="admin_users.php?edit_id=<?= $row['admin_id']; ?>" class="btn btn-warning btn-sm">
+                  <i class="bi bi-pencil"></i>
+                 </a>
+
+                                    <a
+                                        href="#"
+                                        class="btn btn-danger btn-sm">
+
+                                        <i class="bi bi-trash"></i>
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                            <?php
+
+                                }
+                            }
+                            else
+                            {
+
+                            ?>
+
+                            <tr>
+
+                                <td colspan="5" class="text-center">
 
                                     No admin users found.
 
                                 </td>
 
                             </tr>
+
+                            <?php
+
+                            }
+
+                            ?>
 
                         </tbody>
 
@@ -117,5 +254,17 @@ include("../includes/add_admin_modal.php");
     </div>
 
 </div>
+
+<?php include("../includes/add_admin_modal.php"); ?>
+<?php include("../includes/edit_admin_modal.php"); ?>
+
+<?php if ($edit) { ?>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var modal = new bootstrap.Modal(document.getElementById("editAdminModal"));
+    modal.show();
+});
+</script>
+<?php } ?>
 
 <?php include("../includes/footer.php"); ?>
