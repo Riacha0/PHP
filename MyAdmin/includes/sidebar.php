@@ -1,3 +1,9 @@
+<?php
+
+$current_page = basename($_SERVER['PHP_SELF']);
+
+?>
+
 <div class="col-lg-2 sidebar text-white p-4">
 
     <div class="text-center">
