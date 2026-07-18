@@ -10,21 +10,22 @@ include("../includes/header.php");
 
 <?php
 
-if(isset($_GET['delete_id'])){
+if (isset($_GET['delete_id'])) {
 
     $delete_id = $_GET['delete_id'];
 
-    $get_image = mysqli_query($conn,
-    "SELECT image FROM products WHERE product_id='$delete_id'");
+    $get_image = mysqli_query($conn, "
+        SELECT image
+        FROM products
+        WHERE product_id='$delete_id'
+    ");
 
     $row = mysqli_fetch_assoc($get_image);
 
-    if($row){
+    if ($row) {
 
-        if(file_exists("../uploads/".$row['image'])){
-
-            unlink("../uploads/".$row['image']);
-
+        if (file_exists("../uploads/" . $row['image'])) {
+            unlink("../uploads/" . $row['image']);
         }
 
     }
@@ -32,30 +33,26 @@ if(isset($_GET['delete_id'])){
     $sql = "DELETE FROM products
             WHERE product_id='$delete_id'";
 
-    if(mysqli_query($conn,$sql)){
+    $delete = mysqli_query($conn, $sql);
+
+    if ($delete) {
+
+        addAuditLog($conn, $_SESSION['admin'], "Deleted Product");
 
         echo "<script>
-
                 alert('Product Deleted Successfully.');
-
                 window.location='manage_products.php';
-
               </script>";
 
-    }
-
-    else{
+    } else {
 
         echo "<script>
-
                 alert('Unable to delete product.');
-
               </script>";
 
     }
 
 }
-
 ?>
 
 <?php
