@@ -1,5 +1,5 @@
 <?php
-
+include("../includes/functions.php");
 include("../includes/session.php");
 include("../includes/db_connection.php");
 include("../includes/header.php");
@@ -317,9 +317,6 @@ if(isset($_POST['save_product'])){
                            <thead class="table-light">
 
                         <tr>
-
-                        <th width="40">
-
                        
                         <th>Image</th>
 
