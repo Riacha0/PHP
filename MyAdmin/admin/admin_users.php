@@ -4,8 +4,8 @@ include("../includes/db_connection.php");
 include("../includes/header.php");
 include("../includes/functions.php");
 
-if(isset($_POST['save_admin']))
-{
+if (isset($_POST['save_admin'])) {
+
     $fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $username = mysqli_real_escape_string($conn, $_POST['username']);
@@ -14,23 +14,34 @@ if(isset($_POST['save_admin']))
 
     $check = mysqli_query($conn, "SELECT * FROM admins WHERE username='$username'");
 
-    if(mysqli_num_rows($check) > 0)
-    {
+    if (mysqli_num_rows($check) > 0) {
+
         echo "<script>alert('Username already exists.');</script>";
-    }
-    else
-    {
-        mysqli_query($conn,"
+
+    } else {
+
+        $insert = mysqli_query($conn, "
             INSERT INTO admins(fullname,email,username,password,role)
             VALUES('$fullname','$email','$username','$password','$role')
         ");
 
-        echo "<script>
-                alert('Admin added successfully.');
-                window.location='admin_users.php';
-              </script>";
+        if ($insert) {
+
+            addAuditLog($conn, $_SESSION['admin'], "Added Admin");
+
+            echo "<script>
+                    alert('Admin added successfully.');
+                    window.location='admin_users.php';
+                  </script>";
+
+        } else {
+
+            echo "<script>alert('Failed to add admin.');</script>";
+
+        }
+
     }
-   
+
 }
 
 if (isset($_POST['update_admin'])) {
@@ -66,6 +77,8 @@ if (isset($_POST['update_admin'])) {
 
         if ($update) {
 
+            addAuditLog($conn, $_SESSION['admin'], "Updated Admin");
+
             echo "<script>
                     alert('Admin updated successfully.');
                     window.location='admin_users.php';
@@ -78,6 +91,8 @@ if (isset($_POST['update_admin'])) {
         }
 
     }
+
+}
 
 if (isset($_GET['delete_id'])) {
 
@@ -92,9 +107,14 @@ if (isset($_GET['delete_id'])) {
 
     } else {
 
-        $delete = mysqli_query($conn, "DELETE FROM admins WHERE admin_id='$delete_id'");
+        $delete = mysqli_query($conn, "
+            DELETE FROM admins
+            WHERE admin_id='$delete_id'
+        ");
 
         if ($delete) {
+
+            addAuditLog($conn, $_SESSION['admin'], "Deleted Admin");
 
             echo "<script>
                     alert('Admin deleted successfully.');
@@ -103,13 +123,14 @@ if (isset($_GET['delete_id'])) {
 
         } else {
 
-            echo "<script>alert('Failed to delete admin.');</script>";
+            echo "<script>
+                    alert('Failed to delete admin.');
+                  </script>";
 
         }
 
     }
 
-}
 }
 
 $edit = null;
