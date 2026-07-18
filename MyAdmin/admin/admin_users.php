@@ -1,5 +1,4 @@
 <?php
-
 include("../includes/session.php");
 include("../includes/db_connection.php");
 include("../includes/header.php");
@@ -30,28 +29,76 @@ if(isset($_POST['save_admin']))
                 window.location='admin_users.php';
               </script>";
     }
-    if (isset($_POST['update_admin'])) {
+   
+}
 
-    $admin_id = $_POST['admin_id'];
+if (isset($_POST['update_admin'])) {
+
+    $admin_id = mysqli_real_escape_string($conn, $_POST['admin_id']);
     $fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $role = mysqli_real_escape_string($conn, $_POST['role']);
 
-    mysqli_query($conn, "
-        UPDATE admins
-        SET fullname='$fullname',
-            email='$email',
-            username='$username',
-            role='$role'
-        WHERE admin_id='$admin_id'
+    $check = mysqli_query($conn, "
+        SELECT *
+        FROM admins
+        WHERE username='$username'
+        AND admin_id != '$admin_id'
     ");
 
-    echo "<script>
-            alert('Admin updated successfully.');
-            window.location='admin_users.php';
-          </script>";
+    if (mysqli_num_rows($check) > 0) {
+
+        echo "<script>alert('Username already exists.');</script>";
+
+    } else {
+
+        $update = mysqli_query($conn, "
+            UPDATE admins
+            SET
+                fullname='$fullname',
+                email='$email',
+                username='$username',
+                role='$role'
+            WHERE admin_id='$admin_id'
+        ");
+
+        if ($update) {
+
+            echo "<script>
+                    alert('Admin updated successfully.');
+                    window.location='admin_users.php';
+                  </script>";
+
+        } else {
+
+            echo "<script>alert('Failed to update admin.');</script>";
+
+        }
+
+    }
+
 }
+if (isset($_GET['delete_id'])) {
+    $delete_id = $_GET['delete_id'];
+
+    if ($delete_id == $_SESSION['admin']) {
+        echo "<script>
+                alert('You cannot delete your own admin account.');
+                window.location='admin_users.php';
+              </script>";
+    } else {
+        $delete = mysqli_query($conn, "DELETE FROM admins WHERE admin_id='$delete_id'");
+
+        if ($delete) {
+            echo "<script>
+                    alert('Admin deleted successfully.');
+                    window.location='admin_users.php';
+                  </script>";
+        } else {
+            echo "<script>alert('Failed to delete admin.');</script>";
+        }
+    }
 }
 
 $edit = null;
