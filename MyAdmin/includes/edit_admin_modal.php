@@ -1,10 +1,16 @@
+<?php
+if (!$edit) {
+    return;
+}
+?>
+
 <div class="modal fade" id="editAdminModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
 
             <form method="POST">
 
-                <input type="hidden" name="admin_id" value="<?= $edit['admin_id']; ?>">
+                <input type="hidden" name="admin_id" value="<?php echo $edit['admin_id']; ?>">
 
                 <div class="modal-header">
                     <h5 class="modal-title">Edit Admin</h5>
@@ -21,7 +27,7 @@
                         <input type="text"
                                name="fullname"
                                class="form-control"
-                               value="<?= $edit['fullname']; ?>"
+                               value="<?php echo $edit['fullname']; ?>"
                                required>
                     </div>
 
@@ -30,7 +36,7 @@
                         <input type="email"
                                name="email"
                                class="form-control"
-                               value="<?= $edit['email']; ?>"
+                               value="<?php echo $edit['email']; ?>"
                                required>
                     </div>
 
@@ -39,7 +45,7 @@
                         <input type="text"
                                name="username"
                                class="form-control"
-                               value="<?= $edit['username']; ?>"
+                               value="<?php echo $edit['username']; ?>"
                                required>
                     </div>
 
@@ -49,12 +55,12 @@
                         <select name="role" class="form-select">
 
                             <option value="Super Admin"
-                                <?= $edit['role'] == "Super Admin" ? "selected" : ""; ?>>
+                                <?php if ($edit['role'] == "Super Admin") echo "selected"; ?>>
                                 Super Admin
                             </option>
 
                             <option value="Administrator"
-                                <?= $edit['role'] == "Administrator" ? "selected" : ""; ?>>
+                                <?php if ($edit['role'] == "Administrator") echo "selected"; ?>>
                                 Administrator
                             </option>
 
