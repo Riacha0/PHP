@@ -8,9 +8,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     <div class="text-center">
 
-        <h2 class="fw-bold">MyAdmin</h2>
+        <h2 class="fw-bold">OCTAVE</h2>
 
-        <small>Administrator Panel</small>
+        <small>Administration</small>
 
     </div>
 
