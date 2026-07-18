@@ -17,7 +17,7 @@ include("../includes/header.php");
 
                 <div>
 
-                    <h2 class="text-primary fw-bold">
+                   <h2 class="fw-bold">
                         Dashboard
                     </h2>
 
