@@ -2,6 +2,7 @@
 include("../includes/session.php");
 include("../includes/db_connection.php");
 include("../includes/header.php");
+include("../includes/functions.php");
 
 if(isset($_POST['save_admin']))
 {
@@ -78,27 +79,37 @@ if (isset($_POST['update_admin'])) {
 
     }
 
-}
 if (isset($_GET['delete_id'])) {
+
     $delete_id = $_GET['delete_id'];
 
     if ($delete_id == $_SESSION['admin']) {
+
         echo "<script>
-                alert('You cannot delete your own admin account.');
+                alert('You cannot delete your own account while you are logged in.');
                 window.location='admin_users.php';
               </script>";
+
     } else {
+
         $delete = mysqli_query($conn, "DELETE FROM admins WHERE admin_id='$delete_id'");
 
         if ($delete) {
+
             echo "<script>
                     alert('Admin deleted successfully.');
                     window.location='admin_users.php';
                   </script>";
+
         } else {
+
             echo "<script>alert('Failed to delete admin.');</script>";
+
         }
+
     }
+
+}
 }
 
 $edit = null;
@@ -251,13 +262,14 @@ if (isset($_GET['edit_id'])) {
                   <i class="bi bi-pencil"></i>
                  </a>
 
-                                    <a
-                                        href="#"
-                                        class="btn btn-danger btn-sm">
+                  <a
+                    href="admin_users.php?delete_id=<?= $row['admin_id']; ?>"
+                    class="btn btn-danger btn-sm"
+                    onclick="return confirm('Are you sure you want to delete this admin?');">
 
-                                        <i class="bi bi-trash"></i>
+                   <i class="bi bi-trash"></i>
 
-                                    </a>
+                </a>
 
                                 </td>
 
