@@ -109,7 +109,7 @@ session_start();
 include("../includes/db_connection.php");
 include("../includes/functions.php");
 
-addAuditLog($conn, $_SESSION['admin'], "Logged In");
+
 
 if(isset($_SESSION['admin'])){
 
@@ -135,23 +135,23 @@ if(isset($_POST['login'])){
 
     if(mysqli_num_rows($result)==1){
 
-        $row=mysqli_fetch_assoc($result);
+    $row=mysqli_fetch_assoc($result);
 
-        $_SESSION['admin']=$row['admin_id'];
+    $_SESSION['admin']=$row['admin_id'];
+    $_SESSION['fullname']=$row['fullname'];
+    $_SESSION['role']=$row['role'];
 
-        $_SESSION['fullname']=$row['fullname'];
+    addAuditLog($conn, $_SESSION['admin'], "Logged In");
 
-        $_SESSION['role']=$row['role'];
+    echo "<script>
 
-        echo "<script>
+            alert('Login Successful.');
 
-                alert('Login Successful.');
+            window.location='dashboard.php';
 
-                window.location='dashboard.php';
+          </script>";
 
-              </script>";
-
-    }
+}
 
     else{
 
