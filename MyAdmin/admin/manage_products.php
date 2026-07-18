@@ -75,7 +75,7 @@ if(isset($_GET['edit_id'])){
 
 }
 
-if(isset($_POST['update_product'])){
+if (isset($_POST['update_product'])) {
 
     $product_id = $_POST['product_id'];
     $product_name = $_POST['product_name'];
@@ -85,15 +85,14 @@ if(isset($_POST['update_product'])){
     $stock = $_POST['stock'];
     $old_image = $_POST['old_image'];
 
-    if($_FILES['image']['name'] != ""){
+    if ($_FILES['image']['name'] != "") {
 
         $image = $_FILES['image']['name'];
         $temp_image = $_FILES['image']['tmp_name'];
 
-        move_uploaded_file($temp_image, "../uploads/".$image);
+        move_uploaded_file($temp_image, "../uploads/" . $image);
 
-    }
-    else{
+    } else {
 
         $image = $old_image;
 
@@ -108,15 +107,18 @@ if(isset($_POST['update_product'])){
                 image='$image'
             WHERE product_id='$product_id'";
 
-    if(mysqli_query($conn, $sql)){
+    $update = mysqli_query($conn, $sql);
+
+    if ($update) {
+
+        addAuditLog($conn, $_SESSION['admin'], "Updated Product");
 
         echo "<script>
                 alert('Product Updated Successfully.');
                 window.location='manage_products.php';
               </script>";
 
-    }
-    else{
+    } else {
 
         echo "<script>
                 alert('Unable to update product.');
@@ -183,7 +185,7 @@ if(isset($_POST['delete_selected'])){
 
 <?php
 
-if(isset($_POST['save_product'])){
+if (isset($_POST['save_product'])) {
 
     $product_name = $_POST['product_name'];
     $category_id = $_POST['category_id'];
@@ -194,13 +196,11 @@ if(isset($_POST['save_product'])){
     $image = $_FILES['image']['name'];
     $temp_image = $_FILES['image']['tmp_name'];
 
-    move_uploaded_file($temp_image, "../uploads/".$image);
+    move_uploaded_file($temp_image, "../uploads/" . $image);
 
     $sql = "INSERT INTO products
             (category_id, product_name, description, price, stock, image)
-
             VALUES
-
             ('$category_id',
              '$product_name',
              '$description',
@@ -208,24 +208,21 @@ if(isset($_POST['save_product'])){
              '$stock',
              '$image')";
 
-    if(mysqli_query($conn,$sql)){
+    $insert = mysqli_query($conn, $sql);
+
+    if ($insert) {
+
+        addAuditLog($conn, $_SESSION['admin'], "Added Product");
 
         echo "<script>
-
                 alert('Product Added Successfully.');
-
                 window.location='manage_products.php';
-
               </script>";
 
-    }
-
-    else{
+    } else {
 
         echo "<script>
-
                 alert('Unable to save product.');
-
               </script>";
 
     }
