@@ -131,50 +131,46 @@ if (isset($_POST['update_product'])) {
 ?>
 <?php
 
-if(isset($_POST['delete_selected'])){
+if (isset($_POST['delete_selected'])) {
 
-    if(isset($_POST['delete_ids'])){
+    if (isset($_POST['delete_ids'])) {
 
-        foreach($_POST['delete_ids'] as $delete_id){
+        foreach ($_POST['delete_ids'] as $delete_id) {
 
-            $get_image = mysqli_query($conn,
-            "SELECT image FROM products
-             WHERE product_id='$delete_id'");
+            $get_image = mysqli_query($conn, "
+                SELECT image
+                FROM products
+                WHERE product_id='$delete_id'
+            ");
 
             $image_row = mysqli_fetch_assoc($get_image);
 
-            if($image_row){
+            if ($image_row) {
 
-                if(file_exists("../uploads/".$image_row['image'])){
-
-                    unlink("../uploads/".$image_row['image']);
-
+                if (file_exists("../uploads/" . $image_row['image'])) {
+                    unlink("../uploads/" . $image_row['image']);
                 }
 
             }
 
-            mysqli_query($conn,
-            "DELETE FROM products
-             WHERE product_id='$delete_id'");
+            mysqli_query($conn, "
+                DELETE FROM products
+                WHERE product_id='$delete_id'
+            ");
 
         }
 
+        addAuditLog($conn, $_SESSION['admin'], "Deleted Multiple Products");
+
         echo "<script>
-
                 alert('Selected products deleted successfully.');
-
                 window.location='manage_products.php';
-
               </script>";
 
-    }
-
-    else{
+    } else {
 
         echo "<script>
-
                 alert('Please select at least one product.');
-
               </script>";
 
     }
